@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class UnderstandingAssertsApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(UnderstandingAssertsApplication.class, args);
+	public void methodThatShouldThrowException() {
+		throw new UnsupportedOperationException("Operation will fail");
 	}
-
 }
+
+
+
