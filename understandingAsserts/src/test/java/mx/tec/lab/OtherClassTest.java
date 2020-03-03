@@ -1,6 +1,8 @@
 package mx.tec.lab;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
 
 public class OtherClassTest {
@@ -20,8 +22,8 @@ public class OtherClassTest {
 		int x = 3;
 		try {
 	    	System.out.print(oc.multiply(x,222));
-	    } catch (UnsupportedOperationException e) {
-	        assertEquals("X should be less than 1000", e.getMessage());
+	    } catch (IllegalArgumentException e) {
+	        assertNotSame("X should be less than 1000", e.getMessage());
 	    }
 	}
 
@@ -31,7 +33,8 @@ public class OtherClassTest {
 		int x = 1000;
 		try {
 	    	System.out.print(oc.multiply(x,222));
-	    } catch (UnsupportedOperationException e) {
-	    	assertNotSame("X should be less than 1000", e.getMessage());	    }
+	    	fail("Exception not thrown");
+	    } catch (IllegalArgumentException e) {
+	    	assertEquals("X should be less than 1000", e.getMessage());	    }
 	}
 }
